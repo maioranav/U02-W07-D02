@@ -3,9 +3,35 @@ function getRandomInt(min, max) {
 }
 
 function generateName(val) {
-   const names = ["abandoned", "able", "rocky"];
+   const names = ["Leonardo",
+      "Francesco",
+      "Alessandro",
+      "Lorenzo",
+      "Mattia",
+      "Tommaso",
+      "Gabriele",
+      "Andrea",
+      "Riccardo",
+      "Edoardo"];
 
-   const surnames = ["people", "history", "way", "Tom", "Lieuwe"];
+   const surnames = ["Rossi",
+      "Ferrari",
+      "Russo",
+      "Bianchi",
+      "Romano",
+      "Gallo",
+      "Costa",
+      "Fontana",
+      "Conti",
+      "Barbieri",
+      "Lombardi",
+      "Giordano",
+      "Cassano",
+      "Colombo",
+      "Mancini",
+      "Longo",
+      "Leone",
+      "Martinelli"];
 
    const name = names[getRandomInt(0, names.length)]
    const surname = surnames[getRandomInt(0, surnames.length)]
