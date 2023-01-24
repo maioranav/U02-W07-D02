@@ -51,8 +51,12 @@ const aggiungiPersona = () => {
    let nuovaEta = document.getElementById("eta")
    if (nuovoNome.value && nuovoCognome.value && nuovaEta.value) {
       persone.push(new Person(nuovoNome.value, nuovoCognome.value, Number(nuovaEta.value)))
+      nuovoNome.value = ''
+      nuovoCognome.value = ''
+      nuovaEta.value = ''
       console.log(persone)
       showResults(persone)
+      selectPage(persone, "last")
    } else {
       alert("Devi compilare tutti i campi!")
    }
@@ -64,7 +68,7 @@ const showResults = (array) => {
 
    for (let i = 0; i < array.length; i++) {
       nuovaRiga = document.createElement('tr');
-      nuovaRiga.innerHTML = `<th scope="row">${i}</th>
+      nuovaRiga.innerHTML = `<th scope="row">${i + 1}</th>
       <td> ${array[i].name}</td>
       <td>${array[i].surname}</td>
       <td>${array[i].age}</td>`;
@@ -72,7 +76,35 @@ const showResults = (array) => {
    }
 }
 
+const pagination = (items, pageSize = 10) => {
+   if (items.length > pageSize) {
+      let totalItemsQty = items.length
+      let totalPages = 0  //partendo da zero
+      while (totalItemsQty > pageSize) {
+         totalItemsQty -= pageSize
+         totalPages++
+      }
+      console.log(totalPages)
+      return totalPages //partendo da zero
+   }
+}
+
+const selectPage = (items, activePage = 0, pageSize = 10) => {
+   if (activePage === "last") {
+      activePage = pagination(items)
+   }
+   itemsInPage = []
+   itemsInPage = [...items]
+   if (activePage > 0) {
+      showResults(itemsInPage.slice((pageSize * activePage), (pageSize * activePage) + pageSize))
+   } else {
+      showResults(itemsInPage.slice(0, pageSize))
+   }
+}
 
 
-generatePersons(2)
+
+generatePersons(29)
+selectPage(persone, "last", 10)
+
 document.querySelector("#newPerson").addEventListener("click", aggiungiPersona);
