@@ -123,3 +123,13 @@ document.getElementById('pageSel').onchange = function () {
    paginaScelta = document.getElementById('pageSel').value
    selectPage(persone, paginaScelta)
 }
+
+document.getElementById("checkDiff").onclick = function () {
+   p1 = document.getElementById("p1")
+   p2 = document.getElementById("p2")
+   if (p1.value && p2.value) {
+      document.getElementById("repDiff").innerHTML = Person.ageDiff(persone[p1.value], persone[p2.value])
+   } else {
+      alert("Non hai scelto l'Id!")
+   }
+}
