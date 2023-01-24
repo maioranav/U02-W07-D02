@@ -38,19 +38,24 @@ class Person {
 
 }
 
+Person.id = 0
+
 const persone = []
 const generatePersons = (quantity) => {
    for (let i = 0; i < quantity; i++) {
       persone.push(new Person(generateName(1), generateName("surname"), getRandomInt(10, 50)))
-      showResults(persone)
+      persone[i].id = i
    }
+   showResults(persone)
 }
 const aggiungiPersona = () => {
    let nuovoNome = document.getElementById("name")
    let nuovoCognome = document.getElementById("surname")
    let nuovaEta = document.getElementById("eta")
    if (nuovoNome.value && nuovoCognome.value && nuovaEta.value) {
+      posizione = persone.length
       persone.push(new Person(nuovoNome.value, nuovoCognome.value, Number(nuovaEta.value)))
+      persone[posizione].id = posizione
       nuovoNome.value = ''
       nuovoCognome.value = ''
       nuovaEta.value = ''
@@ -68,7 +73,7 @@ const showResults = (array) => {
 
    for (let i = 0; i < array.length; i++) {
       nuovaRiga = document.createElement('tr');
-      nuovaRiga.innerHTML = `<th scope="row">${i + 1}</th>
+      nuovaRiga.innerHTML = `<th scope="row">${array[i].id}</th>
       <td> ${array[i].name}</td>
       <td>${array[i].surname}</td>
       <td>${array[i].age}</td>`;
