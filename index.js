@@ -110,7 +110,7 @@ const showResults = (array) => {
 const pagination = (items, pageSize = 10) => {
    if (items.length > pageSize) {
       let totalItemsQty = items.length
-      let totalPages = 0  //partendo da zero
+      let totalPages = 0
       while (totalItemsQty > pageSize) {
          totalItemsQty -= pageSize
          totalPages++
@@ -121,7 +121,7 @@ const pagination = (items, pageSize = 10) => {
       for (let i = 0; i < totalPages + 1; i++) {
          selettore.innerHTML += `<option value="${i}">${i + 1}</option>`
       }
-      return totalPages //partendo da zero
+      return totalPages
    }
 }
 
@@ -139,8 +139,6 @@ const selectPage = (items, activePage = 0, pageSize = 10) => {
    }
 }
 
-
-
 generatePersons(29)
 selectPage(persone, "last")
 
@@ -153,9 +151,9 @@ document.getElementById('pageSel').onchange = function () {
 document.getElementById("checkDiff").onclick = function () {
    p1 = document.getElementById("p1")
    p2 = document.getElementById("p2")
-   if (p1.value && p2.value) {
+   if (p1.value > -1 && p2.value > -1 && p1.value < persone.length && p2.value < persone.length && p1.value && p2.value) {
       document.getElementById("repDiff").innerHTML = Person.ageDiff(persone[p1.value], persone[p2.value])
    } else {
-      alert("Non hai scelto l'Id!")
+      alert("Non hai inserito un id o hai messo valori non validi!")
    }
 }
