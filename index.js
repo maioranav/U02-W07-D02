@@ -90,13 +90,19 @@ const pagination = (items, pageSize = 10) => {
          totalPages++
       }
       console.log(totalPages)
+      let selettore = document.getElementById('pageSel')
+      selettore.innerHTML = ''
+      for (let i = 0; i < totalPages + 1; i++) {
+         selettore.innerHTML += `<option value="${i}">${i + 1}</option>`
+      }
       return totalPages //partendo da zero
    }
 }
 
 const selectPage = (items, activePage = 0, pageSize = 10) => {
    if (activePage === "last") {
-      activePage = pagination(items)
+      activePage = pagination(items, pageSize)
+      document.querySelector('#pageSel > option:last-child').setAttribute("selected", "")
    }
    itemsInPage = []
    itemsInPage = [...items]
@@ -110,6 +116,10 @@ const selectPage = (items, activePage = 0, pageSize = 10) => {
 
 
 generatePersons(29)
-selectPage(persone, "last", 10)
+selectPage(persone, "last")
 
 document.querySelector("#newPerson").addEventListener("click", aggiungiPersona);
+document.getElementById('pageSel').onchange = function () {
+   paginaScelta = document.getElementById('pageSel').value
+   selectPage(persone, paginaScelta)
+}
